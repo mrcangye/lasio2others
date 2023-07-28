@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'test1.ui'
+# Form implementation generated from reading ui file 'lasio2others.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 
 class Ui_MainWindow(object):
@@ -18,10 +19,10 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(384, 72, 111, 31))
+        self.pushButton.setGeometry(QtCore.QRect(390, 70, 101, 31))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(384, 142, 111, 31))
+        self.pushButton_2.setGeometry(QtCore.QRect(390, 270, 101, 31))
         self.pushButton_2.setObjectName("pushButton_2")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(30, 40, 321, 161))
@@ -29,17 +30,36 @@ class Ui_MainWindow(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(20, 10, 75, 23))
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_4.setGeometry(QtCore.QRect(390, 140, 101, 31))
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5.setGeometry(QtCore.QRect(390, 200, 101, 31))
+        self.pushButton_5.setObjectName("pushButton_5")
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        self.statusBar = QtWidgets.QStatusBar(MainWindow)
+        self.statusBar.setAccessibleName("")
+        self.statusBar.setObjectName("statusBar")
+        MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
         self.pushButton_2.clicked.connect(MainWindow.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
         self.pushButton_3.clicked.connect(self.bindList)
         self.pushButton.clicked.connect(self.lasio2excel)
+        self.pushButton_4.clicked.connect(self.lasio2txt)
+        self.pushButton_5.clicked.connect(self.lasio2csv)
         self.Files = []
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "格式转换器"))
+        self.pushButton.setText(_translate("MainWindow", "转换为.xlsx"))
+        self.pushButton_2.setText(_translate("MainWindow", "退出"))
+        self.pushButton_3.setText(_translate("MainWindow", "选择文件"))
+        self.pushButton_4.setText(_translate("MainWindow", "转换为.txt"))
+        self.pushButton_5.setText(_translate("MainWindow", "转换为.csv"))
     def bindList(self):
         import os
         from PyQt5.QtWidgets import QFileDialog
@@ -49,7 +69,7 @@ class Ui_MainWindow(object):
         dir.setNameFilter('las文件(*.las)')
         if dir.exec_():
             self.listWidget.addItems(dir.selectedFiles())
-        print(dir.selectedFiles())
+        #print(dir.selectedFiles())
         self.Files = dir.selectedFiles()
 
     def lasio2excel(self):
@@ -63,15 +83,34 @@ class Ui_MainWindow(object):
             #print("begin lasio to xlsx")
             data.to_excel(i.replace(".las",".xlsx"))
             #print(f"{i} is finish")
-        print("all success!")
+        QMessageBox.information(None,"消息",".xlsx 转换成功")
 
+    def lasio2txt(self):
+        #print("lsaip2xlsx")
+        import lasio
+        for i in self.Files:
+            #print(i)
+            #print("   ||||    ")
+            data = lasio.read(i)
+            #print("read success")
+            #print("begin lasio to xlsx")
+            data.to_csv(i.replace(".las",".txt"))
+            #print(f"{i} is finish")
+        QMessageBox.information(None,"消息",".txt 转换成功")
 
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "格式转换器"))
-        self.pushButton.setText(_translate("MainWindow", "转换"))
-        self.pushButton_2.setText(_translate("MainWindow", "退出"))
-        self.pushButton_3.setText(_translate("MainWindow", "选择文件"))
+    def lasio2csv(self):
+        #print("lsaip2xlsx")
+        import lasio
+        for i in self.Files:
+            #print(i)
+            #print("   ||||    ")
+            data = lasio.read(i)
+            #print("read success")
+            #print("begin lasio to xlsx")
+            data.to_csv(i.replace(".las",".csv"))
+            #print(f"{i} is finish")
+        QMessageBox.information(None,"消息",".csv 转换成功")
+
 import sys
 
 if __name__ == "__main__":

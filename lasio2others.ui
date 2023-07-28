@@ -17,22 +17,22 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>384</x>
-      <y>72</y>
-      <width>111</width>
+      <x>390</x>
+      <y>70</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>转换</string>
+     <string>转换为.xlsx</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>384</x>
-      <y>142</y>
-      <width>111</width>
+      <x>390</x>
+      <y>270</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
@@ -63,8 +63,38 @@
      <string>选择文件</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>140</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>转换为.txt</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>200</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>转换为.csv</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="accessibleName">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
